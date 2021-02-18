@@ -57,7 +57,6 @@ def align_wav_and_text():
     """Align wav and text.
 
     """
-
     wav_spk_dir_paths = glob.glob(os.path.join(config.ASR_DATA_DIR_PATH, "wav", "*"))
     for wav_spk_dir_path in wav_spk_dir_paths:
         txt_spk_dir_path = os.path.join(config.ASR_DATA_DIR_PATH, "txt", os.path.basename(wav_spk_dir_path))
@@ -66,7 +65,7 @@ def align_wav_and_text():
         os.system("perl ./utils/segmentation-kit/dir_change_segment_julius.pl {} {} {}".format(wav_spk_dir_path, txt_spk_dir_path, lab_spk_dir_path))
 
 def prepare_csj():
-    # split_wav()
+    split_wav()
     align_wav_and_text()
     
 if __name__ == "__main__":
