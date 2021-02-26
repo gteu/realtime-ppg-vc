@@ -83,16 +83,18 @@ def load_trn(trn_path):
     for i in range(len(segments) - 1):
         silence_time = float(segments[i+1]["segment_start_time"]) - float(segments[i]["segment_end_time"])
         if silence_time > 0.5:
-            if len(segment_text) != 0 and float(segment_end_time) - float(segment_start_time) > 1:
+            if len(segment_text) != 0 and 15 > float(segment_end_time) - float(segment_start_time) > 1:
+                if segment_text[-4:] == " sp ":
+                    segment_text = segment_text[:-4]
                 segments_concat = append_segment(segments_concat, segment_start_time, segment_end_time, segment_text)
             segment_text = segments[i+1]["segment_text"]
             segment_start_time = segments[i+1]["segment_start_time"]
             segment_end_time = segments[i+1]["segment_end_time"]
         else:
-            segment_text += segments[i+1]["segment_text"]
+            segment_text += segments[i+1]["segment_text"] + " sp "
             segment_end_time = segments[i+1]["segment_end_time"]
 
-    if len(segment_text) != 0 and float(segment_end_time) - float(segment_start_time) > 1:
+    if len(segment_text) != 0 and 15 > float(segment_end_time) - float(segment_start_time) > 1:
         segments_concat = append_segment(segments_concat, segment_start_time, segment_end_time, segment_text)
  
     return segments_concat

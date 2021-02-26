@@ -55,7 +55,7 @@ if ($^O =~ /MSWin/){
 }
 
 ## acoustic model
-$hmmdefs="./models/hmmdefs_monof_mix16_gid.binhmm"; # monophone model
+$hmmdefs="/work/goto/20210211_ppgvc/RealtimePPGVC/utils/segmentation-kit/models/hmmdefs_monof_mix16_gid.binhmm"; # monophone model
 #$hmmdefs="./models/hmmdefs_ptm_gid.binhmm"; # triphone model
 
 ## HMMList file (needed for triphone model)
