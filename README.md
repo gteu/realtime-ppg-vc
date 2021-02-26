@@ -18,3 +18,10 @@ https://blog.hiroshiba.jp/realtime-yukarin-introduction/
   * 余裕があれば、https://arxiv.org/pdf/1811.06621.pdf にあるStreaming RNN-Tを用いる
 * To-do
   * 音声認識部分が正しく動くことを確認する
+
+## PPG認識学習結果
+<img src="https://user-images.githubusercontent.com/25415810/109280313-34060200-785e-11eb-8279-8eef5c738330.png" width="400px">
+
+## PPG学習サンプル
+* テキスト 「二回から三回...」
+<img src="https://user-images.githubusercontent.com/25415810/109280300-2ea8b780-785e-11eb-9085-776201644f36.png" width="1200px">
