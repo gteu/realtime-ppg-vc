@@ -5,6 +5,8 @@
 https://www.isca-speech.org/archive/SSW_2019/pdfs/SSW10_P_1-10.pdf  
 * 参考論文2（PPGVC実装）  
 http://sython.org/papers/ASJ/saito2019asja_dena.pdf
+* 参考リンク（参考文献2のリアルタイム実装解説記事）  
+https://engineer.dena.com/posts/2020.03/voice-conversion-for-entertainment/
 * 参考リンク（リアルタイムVC解説記事）  
 https://blog.hiroshiba.jp/realtime-yukarin-introduction/
 * 使用データセット  
