@@ -5,6 +5,8 @@ import re
 
 import jaconv
 
+from utils.yomi2phone_rules import three_chars_yomi2phone, two_chars_yomi2phone, one_char_yomi2phone
+
 def append_segment(segments_list, segment_start_time, segment_end_time, segment_text):
     segments_list.append({"segment_start_time": segment_start_time,\
                           "segment_end_time": segment_end_time,\
@@ -100,7 +102,6 @@ def load_trn(trn_path):
     return segments_concat
 
 def yomi2phone(yomi):
-    from yomi2phone_rules import three_chars_yomi2phone, two_chars_yomi2phone, one_char_yomi2phone
     # phone = "silB"
     phone = ""
     while len(yomi):

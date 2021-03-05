@@ -1,18 +1,17 @@
 # coding: utf-8
 """Preprocess dataset.
+split_wav() -> Split wav files into short segments that Julius can process.
+align_wav_and_text() -> Align wav and text using julius.
 
 """
 
 import glob
+from multiprocessing import Pool
 import os
 
 import config
 from utils.preprocess import append_segment, remove_unnecessary_tag, load_trn, yomi2phone
-
-HMMDEFS = "./models/hmmdefs_monof_mix16_gid.binhmm"
-OPTARGS = "-input file"
-OFFSET_ALIGN = 0.0125
-JULIUS_BIN_PATH = config.JULIUS_BIN_PATH
+from utils.arg_wrapper import argwrapper
 
 def save_wav_and_text(segments, in_wav_file_path, file_id):
     """Save splitted wav and text.
@@ -37,32 +36,46 @@ def save_wav_and_text(segments, in_wav_file_path, file_id):
 
         print("Output {}".format(out_text_file_path))
 
+def _split_wav(trn_file_path, wav_file_path, file_id):
+    try:
+        segments = load_trn(trn_file_path)
+        save_wav_and_text(segments, wav_file_path, file_id)
+    except:
+        pass
+
 def split_wav():
     """Split wav in silent sections.    
     
     """
     wav_file_paths = glob.glob(os.path.join(config.CSJ_DIR_PATH, "*/*/*.wav"))
+    func_args = []
     for wav_file_path in wav_file_paths:
         trn_file_path = wav_file_path.replace("-L", "").replace("-R", "").replace(".wav", ".trn")
         file_id = os.path.splitext(os.path.basename(wav_file_path))[0].replace("-L", "").replace("-R", "")
+        func_args.append([_split_wav, trn_file_path, wav_file_path, file_id])
+    
+    with Pool(os.cpu_count()) as p:
+        for i, _ in enumerate(p.imap_unordered(argwrapper, func_args)):
+            pass
 
-        try: 
-            segments = load_trn(trn_file_path)
-        except:
-            continue
-        
-        save_wav_and_text(segments, wav_file_path, file_id)
+def _align_wav_and_text(wav_spk_dir_path, txt_spk_dir_path, lab_spk_dir_path):
+    os.system("perl ./utils/segmentation-kit/dir_change_segment_julius.pl {} {} {}".format(wav_spk_dir_path, txt_spk_dir_path, lab_spk_dir_path))
 
 def align_wav_and_text():
     """Align wav and text.
 
     """
     wav_spk_dir_paths = glob.glob(os.path.join(config.ASR_DATA_DIR_PATH, "wav", "*"))
+    func_args = []
     for wav_spk_dir_path in wav_spk_dir_paths:
         txt_spk_dir_path = os.path.join(config.ASR_DATA_DIR_PATH, "txt", os.path.basename(wav_spk_dir_path))
         lab_spk_dir_path = os.path.join(config.ASR_DATA_DIR_PATH, "lab", os.path.basename(wav_spk_dir_path))
         os.makedirs(lab_spk_dir_path, exist_ok=True)
-        os.system("perl ./utils/segmentation-kit/dir_change_segment_julius.pl {} {} {}".format(wav_spk_dir_path, txt_spk_dir_path, lab_spk_dir_path))
+        func_args.append([_align_wav_and_text, wav_spk_dir_path, txt_spk_dir_path, lab_spk_dir_path])
+
+    with Pool(os.cpu_count()) as p:
+        for i, _ in enumerate(p.imap_unordered(argwrapper, func_args)):
+            pass
 
 def prepare_csj():
     split_wav()
