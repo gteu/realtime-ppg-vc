@@ -57,9 +57,12 @@ class SpeechRecogDataset(Dataset):
 class SpeechGenDataset(Dataset):
     def __init__(self, phase, data, spk):
         # load scaler
-        scaler_file = os.path.join(config.ASR_DATA_DIR_PATH, "scaler.pkl")
-        scaler = pickle.load(open(scaler_file, "rb"))
-        self.X_mean, self.X_scale = scaler["X_mean"], scaler["X_scale"]
+        asr_scaler_file = os.path.join(config.ASR_DATA_DIR_PATH, "scaler.pkl")
+        asr_scaler = pickle.load(open(asr_scaler_file, "rb"))
+        vc_scaler_file = os.path.join(config.VC_DATA_DIR_PATH, "scaler.pkl")
+        vc_scaler = pickle.load(open(vc_scaler_file, "rb"))
+        self.X_mean, self.X_scale = asr_scaler["X_mean"], asr_scaler["X_scale"]
+        self.Y_mean, self.Y_scale = vc_scaler["Y_mean"], vc_scaler["Y_scale"]
 
         # load files
         self.file_id_list = []
@@ -86,12 +89,12 @@ class SpeechGenDataset(Dataset):
         start_idx = random.randint(0, x_len - config.INPUT_LENGTH)
         end_idx = start_idx + config.INPUT_LENGTH
         x = x[start_idx:end_idx]
-
         x = scale(x, self.X_mean, self.X_scale)
         x = x.T
 
         # load output features
         y = np.load(os.path.join(self.y_data_path, self.file_id_list[idx]))
+        y = scale(y, self.Y_mean, self.Y_scale)
         y = y[start_idx:end_idx]
         y = y.T
 

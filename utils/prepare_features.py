@@ -55,7 +55,8 @@ def _extract_acoustic_feats_world(load_spk_dir, save_spk_dir):
         sp = pw.cheaptrick(wav, f0, t, config.SR)  # extract smoothed spectrogram
 
         alpha = pysptk.util.mcepalpha(config.SR)
-        static_mcep = pysptk.sp2mc(sp, config.N_MCEP, alpha)[:, 1:]
+        # static_mcep = pysptk.sp2mc(sp, config.N_MCEP, alpha)[:, 1:]
+        static_mcep = pysptk.sp2mc(sp, config.N_MCEP - 1, alpha)
         static_delta_mcep = apply_delta_windows(static_mcep, windows) # [time, feats]
 
         save_file_path = os.path.join(save_spk_dir, file_id + ".npy")
