@@ -25,3 +25,6 @@ https://blog.hiroshiba.jp/realtime-yukarin-introduction/
 ## PPG学習サンプル
 * テキスト 「二回から三回...」
 <img src="https://user-images.githubusercontent.com/25415810/109280300-2ea8b780-785e-11eb-9085-776201644f36.png" width="1200px">
+
+## VC音声サンプル(ベースライン)
+https://drive.google.com/drive/folders/1EYnLiFi--erwxPRzNRpuI1AAjfAScyxs?usp=sharing
