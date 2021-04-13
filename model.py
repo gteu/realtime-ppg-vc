@@ -67,13 +67,42 @@ class SpeechGenModel(nn.Module):
 
         return x
 
+class DiscrimintorModel(nn.Module):
+    def __init__(self):
+        super(DiscrimintorModel, self).__init__()
+        self.conv_1 = nn.Conv1d(config.N_MCEP, 512, 1, stride = 1)
+        self.bn_1 = nn.BatchNorm1d(512)
+        self.conv_2 = nn.Conv1d(512, 512, 5, stride = 1, padding = 2)
+        self.bn_2 = nn.BatchNorm1d(512)
+        self.conv_3 = nn.Conv1d(512, 512, 5, stride = 1, padding = 2)
+        self.bn_3 = nn.BatchNorm1d(512)
+        self.conv_4 = nn.Conv1d(512, 1, 1, stride=1)
+        # self.lin_1 = nn.Linear(128, 1)
+
+        self.relu = nn.ReLU()
+
+    def forward(self, x):
+        x = self.relu(self.bn_1(self.conv_1(x)))
+        x = self.relu(self.bn_2(self.conv_2(x)))
+        x = self.relu(self.bn_3(self.conv_3(x)))
+        x = self.conv_4(x)
+
+        # x = self.relu(self.conv_4(x))
+        # x = self.lin_1(x)
+
+        return x
+
+
 if __name__ == "__main__":
     device = torch.device("cuda:{}".format(config.GPU_ID) if torch.cuda.is_available() else "cpu")
     # input shape: [batch size, feature dimension, feature length]
     sample = torch.randn(16, 40, 128).to(device)
     sr_model = SpeechRecogModel().to(device)
     sg_model = SpeechGenModel().to(device)
+    dis_model = DiscrimintorModel().to(device)
     output = sr_model(sample)
     output = F.softmax(output, dim=1)
     output = sg_model(output)
+    output = dis_model(output)
+
     print(output.shape)
