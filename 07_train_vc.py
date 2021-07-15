@@ -109,7 +109,7 @@ def main():
         lr = config.VC_LR
     )
 
-    scheduler = StepLR(optimizer, step_size=500, gamma=0.1)
+    scheduler = StepLR(optimizer, step_size=100, gamma=0.1)
 
     criterion = nn.MSELoss()
 

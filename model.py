@@ -92,6 +92,18 @@ class DiscrimintorModel(nn.Module):
 
         return x
 
+class SpeechRecogGenModel(nn.Module):
+    def __init__(self, recog_model, gen_model):
+        super(SpeechRecogGenModel, self).__init__()
+        self.recog_model = recog_model
+        self.gen_model = gen_model
+
+    def forward(self, x):
+        x = self.recog_model(x)
+        x = F.softmax(x, dim=1)
+        x = self.gen_model(x)
+
+        return x
 
 if __name__ == "__main__":
     device = torch.device("cuda:{}".format(config.GPU_ID) if torch.cuda.is_available() else "cpu")

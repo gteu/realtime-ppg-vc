@@ -22,19 +22,23 @@ from model import SpeechRecogModel, SpeechGenModel
 from utils.scale import scale
 from scipy.io import wavfile
 
-target_f0 = 150
+# target_f0 = 150 # JVS001
+target_f0 = 220 # JSUT
 
 def test(file_id, recog_model, gen_model, device, X_mean, X_scale, Y_mean, Y_scale):
     x_path = os.path.join(config.ASR_DATA_DIR_PATH, "X_feats", "train", file_id)
 
-    wav_file_path = glob.glob(os.path.join(config.ASR_DATA_DIR_PATH, "wav", file_id.replace(".npy", ".wav")))[0]
-    wav, _ = librosa.core.load(wav_file_path, config.SR)
+    # wav_file_path = glob.glob(os.path.join(config.ASR_DATA_DIR_PATH, "wav", file_id.replace(".npy", ".wav")))[0]
+    wav_file_path = glob.glob(os.path.join(config.ASR_DATA_DIR_PATH, file_id.replace(".npy", ".wav")))[0]
+    wav, _ = librosa.core.load(wav_file_path, config.SR_IN_OUT)
 
     wav = wav.astype(np.float64)
 
-    _f0, t = pw.dio(wav, config.SR)    # raw pitch extractor
-    f0 = pw.stonemask(wav, _f0, t, config.SR)  # pitch refinement
-    ap = pw.d4c(wav, f0, t, config.SR)
+    _f0, t = pw.dio(wav, config.SR_IN_OUT)    # raw pitch extractor
+    f0 = pw.stonemask(wav, _f0, t, config.SR_IN_OUT)  # pitch refinement
+    ap = pw.d4c(wav, f0, t, config.SR_IN_OUT)
+    # bap = pw.code_aperiodicity(ap, config.SR_IN_OUT)
+    # ap = pw.decode_aperiodicity(bap.astype(np.float64), config.SR_IN_OUT, 2048)
 
     f0_rate = target_f0 / f0[np.nonzero(f0)].mean()
 
@@ -43,15 +47,17 @@ def test(file_id, recog_model, gen_model, device, X_mean, X_scale, Y_mean, Y_sca
     # mcep = pysptk.sp2mc(sp, config.N_MCEP, alpha)
     # sp = pysptk.mc2sp(mcep, fftlen = 1024, alpha = alpha)
 
+    wav_mid, _ = librosa.core.load(wav_file_path, config.SR_MID)
+
     x = librosa.core.stft(
-        y = wav.astype(np.float32),
+        y = wav_mid.astype(np.float32),
         n_fft = config.N_FFT,
-        win_length = int(config.WINDOW * config.SR),
-        hop_length = int(config.HOP * config.SR)
+        win_length = int(config.WINDOW * config.SR_MID),
+        hop_length = int(config.HOP * config.SR_MID)
     )
 
     x = np.abs(x) ** 2
-    mel_basis = librosa.filters.mel(sr = config.SR, n_fft = config.N_FFT, n_mels = config.N_MELS)
+    mel_basis = librosa.filters.mel(sr = config.SR_MID, n_fft = config.N_FFT, n_mels = config.N_MELS)
     x = librosa.power_to_db(np.dot(mel_basis, x))
     x = x.T
 
@@ -70,23 +76,25 @@ def test(file_id, recog_model, gen_model, device, X_mean, X_scale, Y_mean, Y_sca
         output = F.softmax(output, dim=1)
         output = gen_model(output)
 
-        alpha =  pysptk.util.mcepalpha(config.SR)
+        # alpha =  pysptk.util.mcepalpha(config.SR_MID)
+        alpha =  pysptk.util.mcepalpha(config.SR_IN_OUT)
 
         tmp_mcep = output.squeeze().cpu().detach().numpy().T.copy()
         tmp_mcep = Y_scale * tmp_mcep + Y_mean
-        tmp_mcep = merlin_post_filter(tmp_mcep, alpha, fftlen = 1024)
+        tmp_mcep = merlin_post_filter(tmp_mcep, alpha, fftlen = config.N_FFT * 2)
 
         tmp_f0 = f0[i * config.INPUT_LENGTH : (i+1) * config.INPUT_LENGTH] * f0_rate
         tmp_ap = ap[i * config.INPUT_LENGTH : (i+1) * config.INPUT_LENGTH]
         # tmp_sp = sp[i * config.INPUT_LENGTH : (i+1) * config.INPUT_LENGTH]
-        tmp_sp = pysptk.mc2sp(tmp_mcep, fftlen = 1024, alpha = alpha)
+        tmp_sp = pysptk.mc2sp(tmp_mcep, fftlen = config.N_FFT * 2, alpha = alpha)
 
-        tmp_y = pw.synthesize(tmp_f0.astype(np.float64), tmp_sp.astype(np.float64), tmp_ap.astype(np.float64), config.SR)
+        tmp_y = pw.synthesize(tmp_f0.astype(np.float64), tmp_sp.astype(np.float64), tmp_ap.astype(np.float64), config.SR_IN_OUT)
 
         y = np.concatenate([y, tmp_y])
 
-    output_wav_path = os.path.join("gen", file_id.split("/")[1].replace(".npy", ".wav"))
-    wavfile.write(output_wav_path, rate = config.SR, data = y)
+    # output_wav_path = os.path.join("gen_jsut", file_id.split("/")[-1].replace(".npy", ".wav"))
+    output_wav_path = os.path.join("gen_jsut_16", file_id.split("/")[-1].replace(".npy", ".wav"))
+    wavfile.write(output_wav_path, rate = config.SR_IN_OUT, data = y)
 
 def main():
     device = "cuda:{}".format(config.GPU_ID) if torch.cuda.is_available() else "cpu"
@@ -114,13 +122,15 @@ def main():
     Y_scale = vc_scaler["Y_scale"]
 
     file_id_list = []
-    test_list_path = os.path.join(config.ASR_DATA_DIR_PATH, "valid.list")
+    # test_list_path = os.path.join(config.ASR_DATA_DIR_PATH, "valid.list")
+    test_list_path = os.path.join(config.ASR_DATA_DIR_PATH, "file.list")
     with open(test_list_path) as f:
         for line in f:
             line = line.strip()
             file_id_list.append(line)
 
-    random.shuffle(file_id_list)
+    # random.seed(0)
+    # random.shuffle(file_id_list)
     for file_id in file_id_list[:50]:
         test(file_id, recog_model, gen_model, device, X_mean, X_scale, Y_mean, Y_scale)
         print(file_id)

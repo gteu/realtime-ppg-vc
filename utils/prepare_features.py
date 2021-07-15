@@ -22,17 +22,17 @@ def _extract_acoustic_feats_melspec(load_spk_dir, save_spk_dir):
     wav_file_paths = glob.glob(os.path.join(load_spk_dir, "*.wav"))
     for wav_file_path in wav_file_paths:
         file_id = os.path.splitext(os.path.basename(wav_file_path))[0]
-        wav, _ = librosa.core.load(wav_file_path, config.SR)
+        wav, _ = librosa.core.load(wav_file_path, config.SR_MID)
 
         spec = librosa.core.stft(
             y = wav,
             n_fft = config.N_FFT,
-            win_length = int(config.WINDOW * config.SR),
-            hop_length = int(config.HOP * config.SR)
+            win_length = int(config.WINDOW * config.SR_MID),
+            hop_length = int(config.HOP * config.SR_MID)
         )
 
         spec = np.abs(spec) ** 2
-        mel_basis = librosa.filters.mel(sr = config.SR, n_fft = config.N_FFT, n_mels = config.N_MELS)
+        mel_basis = librosa.filters.mel(sr = config.SR_MID, n_fft = config.N_FFT, n_mels = config.N_MELS)
         spec = librosa.power_to_db(np.dot(mel_basis, spec))
 
         # [feats, time] -> [time, feats]
@@ -46,15 +46,15 @@ def _extract_acoustic_feats_world(load_spk_dir, save_spk_dir):
     wav_file_paths = glob.glob(os.path.join(load_spk_dir, "*.wav"))
     for wav_file_path in wav_file_paths:
         file_id = os.path.splitext(os.path.basename(wav_file_path))[0]
-        wav, _ = librosa.core.load(wav_file_path, config.SR)
+        wav, _ = librosa.core.load(wav_file_path, config.SR_IN_OUT)
 
         wav = wav.astype(np.float64)
 
-        _f0, t = pw.dio(wav, config.SR)    # raw pitch extractor
-        f0 = pw.stonemask(wav, _f0, t, config.SR)  # pitch refinement
-        sp = pw.cheaptrick(wav, f0, t, config.SR)  # extract smoothed spectrogram
+        _f0, t = pw.dio(wav, config.SR_IN_OUT)    # raw pitch extractor
+        f0 = pw.stonemask(wav, _f0, t, config.SR_IN_OUT)  # pitch refinement
+        sp = pw.cheaptrick(wav, f0, t, config.SR_IN_OUT)  # extract smoothed spectrogram
 
-        alpha = pysptk.util.mcepalpha(config.SR)
+        alpha = pysptk.util.mcepalpha(config.SR_IN_OUT)
         # static_mcep = pysptk.sp2mc(sp, config.N_MCEP, alpha)[:, 1:]
         static_mcep = pysptk.sp2mc(sp, config.N_MCEP - 1, alpha)
         static_delta_mcep = apply_delta_windows(static_mcep, windows) # [time, feats]
@@ -170,3 +170,40 @@ def split_data(data_dir_path):
         f.write("\n".join(valid_list))
     with open(test_list_path, mode = "w") as f:
         f.write("\n".join(test_list))
+
+def split_data_single_speaker(data_dir_path):
+    """Split data into train/valid data and test data.
+    
+    """
+
+    # split data into train/valid data and test data
+    spk = os.listdir(os.path.join(data_dir_path, "X_feats"))[0]
+
+    for feat_name in ["X_feats", "Y_feats"]:
+        train_dir = os.path.join(data_dir_path, feat_name, "train")
+        test_dir = os.path.join(data_dir_path, feat_name, "test")
+        os.makedirs(train_dir, exist_ok=True)
+        os.makedirs(test_dir, exist_ok=True)
+
+        from_spk_dir = os.path.join(data_dir_path, feat_name, spk)
+        to_spk_dir = os.path.join(data_dir_path, feat_name, "train", spk)
+        shutil.move(from_spk_dir, to_spk_dir)
+
+    # generate file id list 
+    train_list_path = os.path.join(data_dir_path, "train.list")
+    valid_list_path = os.path.join(data_dir_path, "valid.list")
+
+    train_list, valid_list= [], []
+
+    files = sorted(glob.glob(os.path.join(data_dir_path, "X_feats", "train", spk, "*.npy")))
+    for j, file_path in enumerate(files):
+        file_id = os.path.join(file_path.split("/")[-2], file_path.split("/")[-1])
+        if j < len(files) * (1 - config.VALID_P):
+            train_list.append(file_id)
+        else:
+            valid_list.append(file_id)
+
+    with open(train_list_path, mode = "w") as f:
+        f.write("\n".join(train_list))
+    with open(valid_list_path, mode = "w") as f:
+        f.write("\n".join(valid_list))
