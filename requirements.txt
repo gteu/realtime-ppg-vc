@@ -1,132 +1,132 @@
-# packages in environment at /home/goto/anaconda3/envs/embed:
-#
-# Name                    Version                   Build  Channel
-_libgcc_mutex             0.1                 conda_forge    conda-forge
-_openmp_mutex             4.5                       1_gnu    conda-forge
-appdirs                   1.4.4                      py_0  
-astroid                   2.4.2                    py38_0  
-audioread                 2.1.8            py38h32f6830_2    conda-forge
-augment                   0.2                       dev_0    <develop>
-blas                      1.0                         mkl  
-brotlipy                  0.7.0           py38h27cfd23_1003  
-bzip2                     1.0.8                h7b6447c_0  
-ca-certificates           2020.12.5            ha878542_0    conda-forge
-certifi                   2020.12.5        py38h578d9bd_1    conda-forge
-cffi                      1.14.3           py38h261ae71_2  
-chardet                   3.0.4           py38h06a4308_1003  
-cryptography              3.2.1            py38h3c74f83_1  
-cudatoolkit               10.1.243             h6bb024c_0  
-cycler                    0.10.0                   py38_0  
-cython                    0.29.21                  pypi_0    pypi
-dbus                      1.13.18              hb2f20db_0  
-decorator                 4.4.2                      py_0  
-expat                     2.2.10               he6710b0_2  
-fastdtw                   0.3.4                    pypi_0    pypi
-ffmpeg                    4.2.2                h20bf706_0  
-fontconfig                2.13.0               h9420a91_0  
-freetype                  2.10.4               h5ab3b9f_0  
-gettext                   0.19.8.1             h9b4dc7a_1  
-glib                      2.66.1               h92f7085_0  
-gmp                       6.1.2                h6c8ec71_1  
-gnutls                    3.6.5             h71b1129_1002  
-gst-plugins-base          1.14.0               hbbd80ab_1  
-gstreamer                 1.14.0               hb31296c_0  
-icu                       58.2                 he6710b0_3  
-idna                      2.10                       py_0  
-intel-openmp              2020.2                      254  
-isort                     5.6.4                      py_0  
-joblib                    0.17.0                     py_0  
-jpeg                      9b                   h024ee3a_2  
-kiwisolver                1.3.0            py38h2531618_0  
-lame                      3.100                h7b6447c_0  
-lazy-object-proxy         1.4.3            py38h7b6447c_0  
-lcms2                     2.11                 h396b838_0  
-ld_impl_linux-64          2.33.1               h53a641e_7  
-libedit                   3.1.20191231         h14c3975_1  
-libffi                    3.3                  he6710b0_2  
-libflac                   1.3.3                he1b5a44_0    conda-forge
-libgcc-ng                 9.3.0               h2828fa1_19    conda-forge
-libgfortran-ng            7.3.0                hdf63c60_0  
-libgomp                   9.3.0               h2828fa1_19    conda-forge
-libllvm10                 10.0.1               hbcb73fb_5  
-libogg                    1.3.2                h7b6447c_0  
-libopus                   1.3.1                h7b6447c_0  
-libpng                    1.6.37               hbc83047_0  
-libprotobuf               3.15.8               h780b84a_0    conda-forge
-librosa                   0.8.0              pyh9f0ad1d_0    conda-forge
-libsndfile                1.0.28            he1b5a44_1000    conda-forge
-libstdcxx-ng              9.3.0               h6de172a_19    conda-forge
-libtiff                   4.1.0                h2733197_1  
-libuuid                   1.0.3                h1bed415_2  
-libvorbis                 1.3.7                h7b6447c_0  
-libvpx                    1.7.0                h439df22_0  
-libxcb                    1.14                 h7b6447c_0  
-libxml2                   2.9.10               hb55368b_3  
-llvmlite                  0.34.0           py38h269e1b5_4  
-lz4-c                     1.9.2                heb0550a_3  
-matplotlib                3.3.2                         0  
-matplotlib-base           3.3.2            py38h817c723_0  
-mccabe                    0.6.1                    py38_1  
-mkl                       2020.2                      256  
-mkl-service               2.3.0            py38he904b0f_0  
-mkl_fft                   1.2.0            py38h23d657b_0  
-mkl_random                1.1.1            py38h0573a6f_0  
-ncurses                   6.2                  he6710b0_1  
-nettle                    3.4.1                hbb512f6_0  
-ninja                     1.10.1           py38hfd86e86_0  
-nnmnkwii                  0.0.22                   pypi_0    pypi
-numba                     0.51.2           py38h0573a6f_1  
-numpy                     1.19.2           py38h54aff64_0  
-numpy-base                1.19.2           py38hfa32c7d_0  
-olefile                   0.46                       py_0  
-onnx                      1.9.0            py38h6ba8f09_0    conda-forge
-openh264                  2.1.0                hd408876_0  
-openssl                   1.1.1k               h7f98852_0    conda-forge
-packaging                 20.4                       py_0  
-pandas                    1.1.3            py38he6710b0_0  
-pcre                      8.44                 he6710b0_0  
-pillow                    8.0.1            py38he98fc37_0  
-pip                       20.2.4           py38h06a4308_0  
-pooch                     1.1.1                      py_0    conda-forge
-protobuf                  3.15.8           py38h709712a_0    conda-forge
-pycparser                 2.20                       py_2  
-pylint                    2.6.0                    py38_0  
-pyopenssl                 19.1.0             pyhd3eb1b0_1  
-pyparsing                 2.4.7                      py_0  
-pyqt                      5.9.2            py38h05f1152_4  
-pysocks                   1.7.1            py38h06a4308_0  
-pysoundfile               0.10.2                  py_1001    conda-forge
-pysptk                    0.1.18                   pypi_0    pypi
-python                    3.8.5                hcff3b4d_0  
-python-dateutil           2.8.1                      py_0  
-python_abi                3.8                      1_cp38    conda-forge
-pytorch                   1.4.0           py3.8_cuda10.1.243_cudnn7.6.3_0    pytorch
-pytz                      2020.1                     py_0  
-pyworld                   0.2.12                   pypi_0    pypi
-qt                        5.9.7                h5867ecd_1  
-readline                  8.0                  h7b6447c_0  
-requests                  2.24.0                     py_0  
-resampy                   0.2.2                      py_0    conda-forge
-scikit-learn              0.23.2           py38h0573a6f_0  
-scipy                     1.5.2            py38h0b6359f_0  
-seaborn                   0.11.0                     py_0    anaconda
-setuptools                50.3.1           py38h06a4308_1  
-sip                       4.19.13          py38he6710b0_0  
-six                       1.15.0           py38h06a4308_0  
-sqlite                    3.33.0               h62c20be_0  
-tbb                       2020.3               hfd86e86_0  
-threadpoolctl             2.1.0              pyh5ca1d4c_0  
-tk                        8.6.10               hbc83047_0  
-toml                      0.10.1                     py_0  
-torchaudio                0.4.0                      py38    pytorch
-tornado                   6.0.4            py38h7b6447c_1  
-tqdm                      4.49.0             pyh9f0ad1d_0    conda-forge
-typing-extensions         3.7.4.3                       0    conda-forge
-typing_extensions         3.7.4.3                    py_0    conda-forge
-urllib3                   1.25.11                    py_0  
-wheel                     0.35.1             pyhd3eb1b0_0  
-wrapt                     1.11.2           py38h7b6447c_0  
-x264                      1!157.20191217       h7b6447c_0  
-xz                        5.2.5                h7b6447c_0  
-zlib                      1.2.11               h7b6447c_3  
-zstd                      1.4.5                h9ceee32_0  
+# This file may be used to create an environment using:
+# $ conda create --name <env> --file <this file>
+# platform: linux-64
+_libgcc_mutex=0.1=conda_forge
+_openmp_mutex=4.5=1_gnu
+appdirs=1.4.4=py_0
+astroid=2.4.2=py38_0
+audioread=2.1.8=py38h32f6830_2
+augment=0.2=dev_0
+blas=1.0=mkl
+brotlipy=0.7.0=py38h27cfd23_1003
+bzip2=1.0.8=h7b6447c_0
+ca-certificates=2020.12.5=ha878542_0
+certifi=2020.12.5=py38h578d9bd_1
+cffi=1.14.3=py38h261ae71_2
+chardet=3.0.4=py38h06a4308_1003
+cryptography=3.2.1=py38h3c74f83_1
+cudatoolkit=10.1.243=h6bb024c_0
+cycler=0.10.0=py38_0
+cython=0.29.21=pypi_0
+dbus=1.13.18=hb2f20db_0
+decorator=4.4.2=py_0
+expat=2.2.10=he6710b0_2
+fastdtw=0.3.4=pypi_0
+ffmpeg=4.2.2=h20bf706_0
+fontconfig=2.13.0=h9420a91_0
+freetype=2.10.4=h5ab3b9f_0
+gettext=0.19.8.1=h9b4dc7a_1
+glib=2.66.1=h92f7085_0
+gmp=6.1.2=h6c8ec71_1
+gnutls=3.6.5=h71b1129_1002
+gst-plugins-base=1.14.0=hbbd80ab_1
+gstreamer=1.14.0=hb31296c_0
+icu=58.2=he6710b0_3
+idna=2.10=py_0
+intel-openmp=2020.2=254
+isort=5.6.4=py_0
+joblib=0.17.0=py_0
+jpeg=9b=h024ee3a_2
+kiwisolver=1.3.0=py38h2531618_0
+lame=3.100=h7b6447c_0
+lazy-object-proxy=1.4.3=py38h7b6447c_0
+lcms2=2.11=h396b838_0
+ld_impl_linux-64=2.33.1=h53a641e_7
+libedit=3.1.20191231=h14c3975_1
+libffi=3.3=he6710b0_2
+libflac=1.3.3=he1b5a44_0
+libgcc-ng=9.3.0=h2828fa1_19
+libgfortran-ng=7.3.0=hdf63c60_0
+libgomp=9.3.0=h2828fa1_19
+libllvm10=10.0.1=hbcb73fb_5
+libogg=1.3.2=h7b6447c_0
+libopus=1.3.1=h7b6447c_0
+libpng=1.6.37=hbc83047_0
+libprotobuf=3.15.8=h780b84a_0
+librosa=0.8.0=pyh9f0ad1d_0
+libsndfile=1.0.28=he1b5a44_1000
+libstdcxx-ng=9.3.0=h6de172a_19
+libtiff=4.1.0=h2733197_1
+libuuid=1.0.3=h1bed415_2
+libvorbis=1.3.7=h7b6447c_0
+libvpx=1.7.0=h439df22_0
+libxcb=1.14=h7b6447c_0
+libxml2=2.9.10=hb55368b_3
+llvmlite=0.34.0=py38h269e1b5_4
+lz4-c=1.9.2=heb0550a_3
+matplotlib=3.3.2=0
+matplotlib-base=3.3.2=py38h817c723_0
+mccabe=0.6.1=py38_1
+mkl=2020.2=256
+mkl-service=2.3.0=py38he904b0f_0
+mkl_fft=1.2.0=py38h23d657b_0
+mkl_random=1.1.1=py38h0573a6f_0
+ncurses=6.2=he6710b0_1
+nettle=3.4.1=hbb512f6_0
+ninja=1.10.1=py38hfd86e86_0
+nnmnkwii=0.0.22=pypi_0
+numba=0.51.2=py38h0573a6f_1
+numpy=1.19.2=py38h54aff64_0
+numpy-base=1.19.2=py38hfa32c7d_0
+olefile=0.46=py_0
+onnx=1.9.0=py38h6ba8f09_0
+openh264=2.1.0=hd408876_0
+openssl=1.1.1k=h7f98852_0
+packaging=20.4=py_0
+pandas=1.1.3=py38he6710b0_0
+pcre=8.44=he6710b0_0
+pillow=8.0.1=py38he98fc37_0
+pip=20.2.4=py38h06a4308_0
+pooch=1.1.1=py_0
+protobuf=3.15.8=py38h709712a_0
+pycparser=2.20=py_2
+pylint=2.6.0=py38_0
+pyopenssl=19.1.0=pyhd3eb1b0_1
+pyparsing=2.4.7=py_0
+pyqt=5.9.2=py38h05f1152_4
+pysocks=1.7.1=py38h06a4308_0
+pysoundfile=0.10.2=py_1001
+pysptk=0.1.18=pypi_0
+python=3.8.5=hcff3b4d_0
+python-dateutil=2.8.1=py_0
+python_abi=3.8=1_cp38
+pytorch=1.4.0=py3.8_cuda10.1.243_cudnn7.6.3_0
+pytz=2020.1=py_0
+pyworld=0.2.12=pypi_0
+qt=5.9.7=h5867ecd_1
+readline=8.0=h7b6447c_0
+requests=2.24.0=py_0
+resampy=0.2.2=py_0
+scikit-learn=0.23.2=py38h0573a6f_0
+scipy=1.5.2=py38h0b6359f_0
+seaborn=0.11.0=py_0
+setuptools=50.3.1=py38h06a4308_1
+sip=4.19.13=py38he6710b0_0
+six=1.15.0=py38h06a4308_0
+sqlite=3.33.0=h62c20be_0
+tbb=2020.3=hfd86e86_0
+threadpoolctl=2.1.0=pyh5ca1d4c_0
+tk=8.6.10=hbc83047_0
+toml=0.10.1=py_0
+torchaudio=0.4.0=py38
+tornado=6.0.4=py38h7b6447c_1
+tqdm=4.49.0=pyh9f0ad1d_0
+typing-extensions=3.7.4.3=0
+typing_extensions=3.7.4.3=py_0
+urllib3=1.25.11=py_0
+wheel=0.35.1=pyhd3eb1b0_0
+wrapt=1.11.2=py38h7b6447c_0
+x264=1!157.20191217=h7b6447c_0
+xz=5.2.5=h7b6447c_0
+zlib=1.2.11=h7b6447c_3
+zstd=1.4.5=h9ceee32_0
