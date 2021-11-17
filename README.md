@@ -2,7 +2,7 @@
 
 Voice conversion model for real-time synthesis using PPG (Phonetic PosteriorGram) as an intermediate feature, written in Pytorch.
 
-## Implementation Details
+## Implementation details
 * Reference
   *  [Implementation of DNN-based real-time voice conversion and its
 improvements by audio data augmentation and mask-shaped device](https://www.isca-speech.org/archive/pdfs/ssw_2019/arakawa19_ssw.pdf) 
