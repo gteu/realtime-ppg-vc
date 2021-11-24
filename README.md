@@ -27,9 +27,9 @@ https://blog.hiroshiba.jp/realtime-yukarin-introduction/ -->
 
 ## PPG training sample
 * Transcript(JP)
-  * 「二回から三回...」
+  * 「二回から...」
 * Transcript(EN)
-  * "n i k a i k a r a s a n k a i ..."  
+  * "n i k a i k a r a ..."  
 <img src="https://user-images.githubusercontent.com/25415810/109280300-2ea8b780-785e-11eb-9085-776201644f36.png" width="1200px">
 
 The correspondence between index and phone is described [here](/utils/phone2num.py).
