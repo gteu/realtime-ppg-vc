@@ -15,6 +15,7 @@ N_MELS = 40
 N_MCEP = 40
 N_PHONE_CLASSES = 41
 INPUT_LENGTH = 128
+SCALE_PER_SPK = True 
 
 # train/valid and test have different speakers.
 #   ┌ TRAIN_P (ex. 0.9)

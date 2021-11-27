@@ -59,7 +59,10 @@ class SpeechGenDataset(Dataset):
         # load scaler
         asr_scaler_file = os.path.join(config.ASR_DATA_DIR_PATH, "scaler.pkl")
         asr_scaler = pickle.load(open(asr_scaler_file, "rb"))
-        vc_scaler_file = os.path.join(config.VC_DATA_DIR_PATH, "scaler.pkl")
+        if config.SCALE_PER_SPK:
+            vc_scaler_file = os.path.join(config.VC_DATA_DIR_PATH, "scalers", spk, "scaler.pkl")
+        else:
+            vc_scaler_file = os.path.join(config.VC_DATA_DIR_PATH, "scaler.pkl")
         vc_scaler = pickle.load(open(vc_scaler_file, "rb"))
         self.X_mean, self.X_scale = asr_scaler["X_mean"], asr_scaler["X_scale"]
         self.Y_mean, self.Y_scale = vc_scaler["Y_mean"], vc_scaler["Y_scale"]

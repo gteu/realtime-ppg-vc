@@ -71,7 +71,7 @@ def valid(valid_loader, recog_model, gen_model, criterion):
 
 def main():
     ct = datetime.now()
-    log_dir = os.path.join(config.LOG_ROOT, "VC", ct.strftime("%Y%m%d_%H%M%S"))
+    log_dir = os.path.join(config.LOG_ROOT, "VC", config.VC_SPEAKER + "-" + ct.strftime("%Y%m%d_%H%M%S"))
 
     if not os.path.exists(log_dir):
         os.makedirs(log_dir)
