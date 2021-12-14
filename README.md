@@ -14,7 +14,7 @@ https://engineer.dena.com/posts/2020.03/voice-conversion-for-entertainment/
 * 参考リンク（リアルタイムVC解説記事）  
 https://blog.hiroshiba.jp/realtime-yukarin-introduction/ -->
 * Dataset
-  * [CSJ Corpus (for training PPG)](https://pj.ninjal.ac.jp/corpus_center/csj/)  
+  * [CSJ Corpus (for training PPG)](https://ccd.ninjal.ac.jp/csj/)  
   * [JVS Corpus (for target speech)](https://sites.google.com/site/shinnosuketakamichi/research-topics/jvs_corpus)  
 <!-- * モデル
   * マルチフレーム入力＋feed-forwardで音声認識が動けばそれを用いる（恐らく一番Latencyが少ない）  
