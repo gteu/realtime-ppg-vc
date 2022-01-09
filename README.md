@@ -4,18 +4,17 @@ Voice conversion model for real-time synthesis using PPG (Phonetic PosteriorGram
 
 ## Implementation details
 * Reference
-  *  [Implementation of DNN-based real-time voice conversion and its
-improvements by audio data augmentation and mask-shaped device](https://www.isca-speech.org/archive/pdfs/ssw_2019/arakawa19_ssw.pdf) 
   * [Joint Adversarial Training of Speech Recognition and Synthesis
 Models for Many-to-One Voice Conversion Using Phonetic
 Posteriorgrams](https://www.jstage.jst.go.jp/article/transinf/E103.D/9/E103.D_2019EDP7297/_pdf/-char/en) 
-http://sython.org/papers/ASJ/saito2019asja_dena.pdf
+<!--   *  [Implementation of DNN-based real-time voice conversion and its
+improvements by audio data augmentation and mask-shaped device](https://www.isca-speech.org/archive/pdfs/ssw_2019/arakawa19_ssw.pdf)  -->
 <!-- * 参考リンク（参考文献2のリアルタイム実装解説記事）  
 https://engineer.dena.com/posts/2020.03/voice-conversion-for-entertainment/
 * 参考リンク（リアルタイムVC解説記事）  
 https://blog.hiroshiba.jp/realtime-yukarin-introduction/ -->
 * Dataset
-  * [CSJ Corpus (for training PPG)](https://pj.ninjal.ac.jp/corpus_center/csj/)  
+  * [CSJ Corpus (for training PPG)](https://ccd.ninjal.ac.jp/csj/)  
   * [JVS Corpus (for target speech)](https://sites.google.com/site/shinnosuketakamichi/research-topics/jvs_corpus)  
 <!-- * モデル
   * マルチフレーム入力＋feed-forwardで音声認識が動けばそれを用いる（恐らく一番Latencyが少ない）  
