@@ -18,10 +18,10 @@ https://blog.hiroshiba.jp/realtime-yukarin-introduction/ -->
   * [CSJ Corpus (for training PPG)](https://ccd.ninjal.ac.jp/csj/)  
   * [JVS Corpus (for target speech)](https://sites.google.com/site/shinnosuketakamichi/research-topics/jvs_corpus)  
 
-## PPG training result
+## ASR training result
 <img src="https://user-images.githubusercontent.com/25415810/109280313-34060200-785e-11eb-8279-8eef5c738330.png" width="400px">
 
-## PPG training sample
+## ASR training sample
 Transcript (Japanese): "二階から...", Transcript (English): "n i k a i k a r a ..."  
 <img src="https://user-images.githubusercontent.com/25415810/109280300-2ea8b780-785e-11eb-9085-776201644f36.png" width="1200px">
 
